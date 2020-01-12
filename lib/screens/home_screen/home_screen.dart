@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_travel_ui/widgets/destination_carousel.dart';
-import 'package:flutter_travel_ui/widgets/hotel_carousel.dart';
+import 'package:flutter_travel_ui/screens/home_screen/widgets/activity_icon.dart';
+import 'package:flutter_travel_ui/screens/home_screen/widgets/destination_carousel/destination_carousel.dart';
+import 'package:flutter_travel_ui/screens/home_screen/widgets/hotel_carousel/hotel_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+  int _selectedIcon = 0;
   int _currentTab = 0;
   final List<IconData> _icons = [
     FontAwesomeIcons.plane,
@@ -17,29 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
     FontAwesomeIcons.walking,
     FontAwesomeIcons.biking,
   ];
-
-  Widget _buildIcon(int index) {
-    return GestureDetector(
-      onTap: () => setState(() => _selectedIndex = index),
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          color: _selectedIndex == index
-              ? Theme.of(context).accentColor
-              : Color(0xFFE7EBEE),
-          borderRadius: BorderRadius.circular(30.0),
-        ),
-        child: Icon(
-          _icons[index],
-          size: 25.0,
-          color: _selectedIndex == index
-              ? Theme.of(context).primaryColor
-              : Color(0xFFB4C1C4),
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: _icons
                   .asMap()
                   .entries
-                  .map((MapEntry map) => _buildIcon(map.key))
+                  .map((MapEntry map) => ActivityIcon(
+                      _icons[map.key],
+                      _selectedIcon == map.key,
+                      () => setState(() => _selectedIcon = map.key)))
                   .toList(),
             ),
             SizedBox(height: 20.0),
