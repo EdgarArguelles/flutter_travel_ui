@@ -1,10 +1,10 @@
 class Activity {
-  String imageUrl;
-  String name;
-  String type;
-  List<String> startTimes;
-  int rating;
-  int price;
+  final String imageUrl;
+  final String name;
+  final String type;
+  final List<String> startTimes;
+  final int rating;
+  final int price;
 
   Activity({
     this.imageUrl,

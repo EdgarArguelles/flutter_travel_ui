@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_travel_ui/widgets/destination_carousel.dart';
 import 'package:flutter_travel_ui/widgets/hotel_carousel.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   int _currentTab = 0;
-  List<IconData> _icons = [
+  final List<IconData> _icons = [
     FontAwesomeIcons.plane,
     FontAwesomeIcons.bed,
     FontAwesomeIcons.walking,
@@ -20,11 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIcon(int index) {
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
+      onTap: () => setState(() => _selectedIndex = index),
       child: Container(
         height: 60.0,
         width: 60.0,
@@ -68,9 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: _icons
                   .asMap()
                   .entries
-                  .map(
-                    (MapEntry map) => _buildIcon(map.key),
-                  )
+                  .map((MapEntry map) => _buildIcon(map.key))
                   .toList(),
             ),
             SizedBox(height: 20.0),
@@ -82,11 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentTab,
-        onTap: (int value) {
-          setState(() {
-            _currentTab = value; 
-          });
-        },
+        onTap: (int value) => setState(() => _currentTab = value),
         items: [
           BottomNavigationBarItem(
             icon: Icon(
@@ -103,9 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
             title: SizedBox.shrink(),
           ),
           BottomNavigationBarItem(
-            icon: CircleAvatar(
-              radius: 15.0,
-              backgroundImage: NetworkImage('http://i.imgur.com/zL4Krbz.jpg'),
+            icon: Icon(
+              Icons.sync_disabled,
+              size: 30.0,
             ),
             title: SizedBox.shrink(),
           )
